@@ -1,6 +1,6 @@
 package packer;
 
 
-public class Packer{
-	
+public class Packer {
+
 }
