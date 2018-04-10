@@ -30,11 +30,13 @@ public class Main {
             if (outputName == null)
                 outputName = outputName = "txt/co_" + splitedCmd[2];
             Packer.compress(inputName, outputName);
+            System.out.println("Compression complete!");
         }
         else if (splitedCmd[1].equals("-u")) {
             if (outputName == null)
                 outputName = outputName = "txt/deco_" + splitedCmd[2];
             Unpacker.decompress(inputName, outputName);
+            System.out.println("Decompression complete!");
         }
     }
 }
