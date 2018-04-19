@@ -1,42 +1,37 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-
 import packer.Packer;
 import unpacker.Unpacker;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Scanner in = new Scanner(System.in);
-        System.out.println("pack-rle [-z|-u] input.txt [-out output.txt]");
-        String cmd;
-        String[] splitedCmd;
-        while (true) {
-            cmd = in.nextLine();
-            splitedCmd = cmd.split(" ");
-            if (!splitedCmd[0].equals("pack-rle") || splitedCmd.length < 3
-                    || (!splitedCmd[1].equals("-z") && !splitedCmd[1].equals("-u"))) {
-                System.out.println("Wrong input. Try again.");
-            } else
-                break;
+        if (args.length == 0) {
+            System.out.println("Wrong input!");
+            return;
+        }
+        if (args.length == 1 && args[0].equals("pack-rle")) {
+            System.out.println("Usage: pack-rle [-z|-u] input.txt [-out output.txt]");
+            return;
+        }
+        if (args.length < 3 || !args[0].equals("pack-rle") ||
+                (!args[1].equals("-z") && !args[1].equals("-u")) ||
+                (args.length != 5 && !args[3].equals("-out"))) {
+            System.out.println("Wrong input!");
+            return;
         }
         String inputName, outputName = null;
-        inputName = "txt/" + splitedCmd[2];
+        inputName = args[2];
 
-        if (splitedCmd.length == 5) {
-            outputName = "txt/" + splitedCmd[4];
+        if (args.length == 5) {
+            outputName = args[4];
         }
 
-        if (splitedCmd[1].equals("-z")) {
+        if (args[1].equals("-z")) {
             if (outputName == null)
-                outputName = outputName = "txt/co_" + splitedCmd[2];
+                outputName = "txt/output/c_" + args[2];
             Packer.compress(inputName, outputName);
-            System.out.println("Compression complete!");
-        }
-        else if (splitedCmd[1].equals("-u")) {
+        } else if (args[1].equals("-u")) {
             if (outputName == null)
-                outputName = outputName = "txt/deco_" + splitedCmd[2];
+                outputName = "txt/output/dc_" + args[2];
             Unpacker.decompress(inputName, outputName);
-            System.out.println("Decompression complete!");
         }
     }
 }

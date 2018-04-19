@@ -21,7 +21,7 @@ public class Packer {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-
+        System.out.println("Compression complete!");
     }
 
     private static short[] charToShort(char[] list) {

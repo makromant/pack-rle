@@ -1,9 +1,8 @@
 package unpacker;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Unpacker {
@@ -20,7 +19,7 @@ public class Unpacker {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-
+        System.out.println("Decompression complete!");
     }
 
     private static short[] charToShort(char[] list) {
@@ -39,11 +38,11 @@ public class Unpacker {
         while (index != inStr.length) {
             if (inStr[index] < 0) {
                 for (int i = 0; i < inStr[index] + Short.MAX_VALUE + 1; i++)
-                    result += (char)inStr[index + 1];
+                    result += (char) inStr[index + 1];
                 index += 2;
             } else {
                 for (int i = 0; i < inStr[index]; i++) {
-                    result += (char)inStr[index + i + 1];
+                    result += (char) inStr[index + i + 1];
                 }
                 index += inStr[index] + 1;
             }
