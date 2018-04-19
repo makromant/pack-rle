@@ -33,20 +33,20 @@ public class Unpacker {
     private static String decompressLine(String line) {
         if (line.length() <= 1) return line;
         short[] inStr = charToShort(line.toCharArray());
-        String result = "";
+        StringBuilder result = new StringBuilder();
         int index = 0;
         while (index != inStr.length) {
             if (inStr[index] < 0) {
                 for (int i = 0; i < inStr[index] + Short.MAX_VALUE + 1; i++)
-                    result += (char) inStr[index + 1];
+                    result.append((char) inStr[index + 1]);
                 index += 2;
             } else {
                 for (int i = 0; i < inStr[index]; i++) {
-                    result += (char) inStr[index + i + 1];
+                    result.append((char) inStr[index + i + 1]);
                 }
                 index += inStr[index] + 1;
             }
         }
-        return result;
+        return result.toString();
     }
 }

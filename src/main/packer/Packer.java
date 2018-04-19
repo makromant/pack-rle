@@ -91,10 +91,10 @@ public class Packer {
             }
             compressed.addAll(temp);
         }
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (Short symb : compressed) {
-            result += (char) ((short) symb);
+            result.append((char) ((short) symb));
         }
-        return result;
+        return result.toString();
     }
 }

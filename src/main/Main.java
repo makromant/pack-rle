@@ -12,8 +12,11 @@ public class Main {
             return;
         }
         if (args.length < 3 || !args[0].equals("pack-rle") ||
-                (!args[1].equals("-z") && !args[1].equals("-u")) ||
-                (args.length != 5 && !args[3].equals("-out"))) {
+                (!args[1].equals("-z") && !args[1].equals("-u"))) {
+            System.out.println("Wrong input!");
+            return;
+        }
+        if (args.length == 5 && !args[3].equals("-out")) {
             System.out.println("Wrong input!");
             return;
         }
@@ -26,11 +29,11 @@ public class Main {
 
         if (args[1].equals("-z")) {
             if (outputName == null)
-                outputName = "txt/output/c_" + args[2];
+                outputName = "txt/output/c_" + args[2].split("/")[args[2].split("/").length - 1];
             Packer.compress(inputName, outputName);
         } else if (args[1].equals("-u")) {
             if (outputName == null)
-                outputName = "txt/output/dc_" + args[2];
+                outputName = "txt/output/dc_" + args[2].split("/")[args[2].split("/").length - 1];
             Unpacker.decompress(inputName, outputName);
         }
     }
